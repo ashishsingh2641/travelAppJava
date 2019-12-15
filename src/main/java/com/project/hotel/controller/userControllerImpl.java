@@ -1,5 +1,7 @@
 package com.project.hotel.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +32,11 @@ public class userControllerImpl implements UserController{
 	@PostMapping("/login")
 	public ResponseEntity<String> userLogin(@RequestBody User user) {
 		return service.userLogin(user);
+	}
+	
+	@GetMapping("/getAllUsers")
+	public List<User> getAllUsers() {
+		return service.getAllUsers();
 	}
 
 }

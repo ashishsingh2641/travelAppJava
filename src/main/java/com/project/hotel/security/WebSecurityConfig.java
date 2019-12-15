@@ -3,6 +3,7 @@ package com.project.hotel.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -31,9 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     // Entry points
     http.authorizeRequests()//
-        .antMatchers("/users/signin").permitAll()//
-        .antMatchers("/users/signup").permitAll()//
-        .antMatchers("/h2-console/**/**").permitAll()
+        .antMatchers("/api/user/login").permitAll()//
+        .antMatchers("/api/user/register").permitAll()//
+        .antMatchers("/api/user/getAllUsers").permitAll()//
         // Disallow everything else..
         .anyRequest().authenticated();
 
@@ -55,12 +56,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/swagger-ui.html")//
         .antMatchers("/configuration/**")//
         .antMatchers("/webjars/**")//
-        .antMatchers("/public")
+        .antMatchers("/public");
         
         // Un-secure H2 Database (for testing purposes, H2 console shouldn't be unprotected in production)
-        .and()
-        .ignoring()
-        .antMatchers("/h2-console/**/**");;
+        //.and()
+        //.ignoring()
+        //.antMatchers("/h2-console/**/**");
+  }
+  
+  @Bean
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+		return super.authenticationManagerBean();
   }
 
   @Bean
