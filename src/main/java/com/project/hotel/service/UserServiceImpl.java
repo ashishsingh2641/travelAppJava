@@ -1,5 +1,7 @@
 package com.project.hotel.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,7 +16,6 @@ import com.project.hotel.entity.User;
 import com.project.hotel.exception.CustomException;
 import com.project.hotel.repository.UserRepository;
 import com.project.hotel.security.JwtTokenProvider;
-
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -43,11 +44,10 @@ public class UserServiceImpl implements UserService {
 			try {
 				if(!isPhoneNumberOrEmailAlreadyExist(user))
 				{
-
+					user.setPassword(passwordEncoder.encode(user.getPassword()));
 					userRepository.save(user);
 					HttpHeaders responseHeaders = new HttpHeaders();
-					responseHeaders.set("user", 
-							"success reg");
+					responseHeaders.set("user","success reg");
 
 					return ResponseEntity.status(HttpStatus.OK)
 							.headers(responseHeaders)
@@ -59,7 +59,6 @@ public class UserServiceImpl implements UserService {
 					return ResponseEntity.status(HttpStatus.FORBIDDEN)
 							.headers(responseHeaders)
 							.body(user);
-
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -75,12 +74,16 @@ public class UserServiceImpl implements UserService {
 	public ResponseEntity<String> userLogin(User user) {
 		
 		try {
+			System.out.println("User Name:- " +user.getEmail() );
+			System.out.println("User Password :- " +user.getPassword());
+			System.out.println("User Role :- " +userRepository.findByEmail(user.getEmail()).getRole());
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 			String jwtToken = jwtTokenProvider.createToken(user.getEmail(), userRepository.findByEmail(user.getEmail()).getRole());
 			return ResponseEntity.status(HttpStatus.OK)
 					.headers(responseHeaders)
 					.body(jwtToken);
 		} catch (AuthenticationException e) {
+			e.printStackTrace();
 			throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
@@ -111,6 +114,11 @@ public class UserServiceImpl implements UserService {
 			return false;
 		}
 
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
 	}
 
 }
