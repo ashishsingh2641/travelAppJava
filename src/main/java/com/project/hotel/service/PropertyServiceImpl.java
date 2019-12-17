@@ -18,6 +18,7 @@ public class PropertyServiceImpl implements PropertyService{
 
 	@Override
 	public ResponseEntity<Object> addProperty(RegisterProperty prop) {
+		System.out.println("+++++++++++" + prop.getAddress1());
 		repository.save(prop);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}

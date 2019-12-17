@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	private boolean isPhoneNumberOrEmailAlreadyExist(com.project.hotel.entity.User user) throws Exception
+	private boolean isPhoneNumberOrEmailAlreadyExist(User user) throws Exception
 	{
 		if(null!=userRepository.findByEmail(user.getEmail())) {
 			System.out.println("USer Email Exists");
