@@ -17,7 +17,7 @@ import com.project.hotel.service.UserService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("api/user")
-public class userControllerImpl implements UserController{
+public class UserControllerImpl implements UserController{
 	
 	private UserService service;
 	
