@@ -6,22 +6,29 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 @Entity
 
 public class User {
 	
-	@Id @GeneratedValue(generator="system-uuid")
+	@Id 
+	@GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String id;
 	private String firstName;
 	private String lastName;
 	private String role;
 	private String phnNumber;
+	
+	@JsonIgnore
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	private String email;
 	
 	public User() {
-		// TODO Auto-generated constructor stub
 	}
 	public String getId() {
 		return id;

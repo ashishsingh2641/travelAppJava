@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.hotel.entity.User;
@@ -17,11 +19,11 @@ import com.project.hotel.service.UserService;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("api/user")
-public class userControllerImpl implements UserController{
+public class UserControllerImpl implements UserController{
 	
 	private UserService service;
 	
-	public userControllerImpl(UserService service) {
+	public UserControllerImpl(UserService service) {
 		this.service=service;
 	}
 
@@ -34,6 +36,11 @@ public class userControllerImpl implements UserController{
 	@PostMapping("/login")
 	public ResponseEntity<String> userLogin(@RequestBody User user) {
 		return service.userLogin(user);
+	}
+	
+	@PutMapping("/changePassword/{userId}")
+	public ResponseEntity<String> changePassword(@PathVariable String userId, @RequestParam String latestPassword) {
+		return service.changePassword(userId,latestPassword);
 	}
 	
 	@GetMapping("/getAllUsers")

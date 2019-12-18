@@ -1,6 +1,7 @@
 package com.project.hotel.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -68,6 +69,24 @@ public class UserServiceImpl implements UserService {
 		return ResponseEntity.status(HttpStatus.FORBIDDEN)
 				.headers(responseHeaders)
 				.body(user);
+	}
+	
+	@Override
+	public ResponseEntity<String> changePassword(String userId, String latestPassword) {
+		Optional<User> returnUser = this.userRepository.findById(userId).map(user -> {
+			user.setPassword(passwordEncoder.encode(latestPassword));
+			return this.userRepository.save(user);
+		});
+		
+		if(returnUser.isPresent())
+			return ResponseEntity.status(HttpStatus.OK)
+				.headers(responseHeaders)
+				.body(returnUser.get().toString());
+		
+		
+		return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY)
+				.headers(responseHeaders)
+				.body("Password Not Able to Change");
 	}
 	
 	@Override

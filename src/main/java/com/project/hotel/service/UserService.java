@@ -9,6 +9,11 @@ import com.project.hotel.entity.User;
 
 public interface UserService {
 	public ResponseEntity<User> userRegister(@RequestBody User user);
+	
 	public ResponseEntity<String> userLogin( @RequestBody User user);
+	
+	public ResponseEntity<String> changePassword(String userId, String latestPassword);
+	
 	public List<User> getAllUsers();
+	
 }
