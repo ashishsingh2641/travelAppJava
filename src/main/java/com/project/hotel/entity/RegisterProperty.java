@@ -29,8 +29,14 @@ public class RegisterProperty {
 	private String description;
 	private boolean semiFurnished;
 	private boolean fullFurnished;
+	private boolean unFurnished;
 	private boolean ac;
 	private boolean nonAc;
+	private boolean wifi;
+	private boolean parking;
+	private boolean lift;
+	private boolean tv;
+	private boolean powerBackUp;
 	
 	public String getId() {
 		return id;
@@ -145,6 +151,42 @@ public class RegisterProperty {
 	}
 	public void setNonAc(boolean nonAc) {
 		this.nonAc = nonAc;
+	}
+	public boolean isUnFurnished() {
+		return unFurnished;
+	}
+	public void setUnFurnished(boolean unFurnished) {
+		this.unFurnished = unFurnished;
+	}
+	public boolean isParking() {
+		return parking;
+	}
+	public void setParking(boolean parking) {
+		this.parking = parking;
+	}
+	public boolean isWifi() {
+		return wifi;
+	}
+	public void setWifi(boolean wifi) {
+		this.wifi = wifi;
+	}
+	public boolean isLift() {
+		return lift;
+	}
+	public void setLift(boolean lift) {
+		this.lift = lift;
+	}
+	public boolean isTv() {
+		return tv;
+	}
+	public void setTv(boolean tv) {
+		this.tv = tv;
+	}
+	public boolean isPowerBackUp() {
+		return powerBackUp;
+	}
+	public void setPowerBackUp(boolean powerBackUp) {
+		this.powerBackUp = powerBackUp;
 	}
 
 }

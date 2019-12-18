@@ -15,5 +15,7 @@ public interface UserService {
 	public ResponseEntity<String> changePassword(String userId, String latestPassword);
 	
 	public List<User> getAllUsers();
+
+	public ResponseEntity<String> getEmail(String emailId);
 	
 }

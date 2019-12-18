@@ -44,6 +44,11 @@ public class UserControllerImpl implements UserController{
 		return service.changePassword(userId,latestPassword);
 	}
 	
+	@GetMapping("/getEmail/{emailId}")
+	public ResponseEntity<String> getEmail(@PathVariable String emailId) {
+		return service.getEmail(emailId);
+	}
+	
 	@GetMapping("/getAllUsers")
 	public List<User> getAllUsers() {
 		return service.getAllUsers();

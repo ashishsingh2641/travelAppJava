@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 		if(returnUser.isPresent())
 			return ResponseEntity.status(HttpStatus.OK)
 				.headers(responseHeaders)
-				.body(returnUser.get().toString());
+				.body("Password Changed Successfully");
 		
 		
 		return ResponseEntity.status(HttpStatus.FAILED_DEPENDENCY)
@@ -138,6 +138,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
+	}
+
+	@Override
+	public ResponseEntity<String> getEmail(String emailId) {
+		User user= userRepository.findByEmail(emailId);
+		if(user != null)
+			return ResponseEntity.status(HttpStatus.OK)
+					.headers(responseHeaders)
+					.body(user.getId());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body("Not Valid Email");
 	}
 
 }
