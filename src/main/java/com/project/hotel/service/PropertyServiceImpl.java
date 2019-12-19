@@ -24,6 +24,11 @@ public class PropertyServiceImpl implements PropertyService{
 		repository.save(prop);
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
+	
+	@Override
+	public List<RegisterProperty> getAllProperty() {
+		return (List<RegisterProperty>)this.repository.findAll();
+	}
 
 	@Override
 	public List<RegisterProperty> getAllProperty(String city) {
@@ -34,4 +39,5 @@ public class PropertyServiceImpl implements PropertyService{
 	public List<String> getAllCity() {
 		return (List<String>)this.repository.findDistinctCity();
 	}
+	
 }

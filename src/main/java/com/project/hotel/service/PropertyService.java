@@ -13,4 +13,6 @@ public interface PropertyService {
 	public List<RegisterProperty> getAllProperty(String city);
 
 	public List<String> getAllCity();
+
+	public List<RegisterProperty> getAllProperty();
 }

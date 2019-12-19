@@ -28,6 +28,11 @@ public class PropertyControllerImpl implements PropertyController{
 	public ResponseEntity<Object> addProperty(@RequestBody RegisterProperty prop) {
 		return service.addProperty(prop);
 	}
+	
+	@GetMapping({ "/getAllProperty" })
+	public List<RegisterProperty> getAllProperty() {
+		return (List<RegisterProperty>)this.service.getAllProperty();
+	}
 
 	@Override
 	@GetMapping({ "/getAllProperty/{city}" })
