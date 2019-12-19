@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 
 import com.project.hotel.entity.RegisterProperty;
 
-public interface PropertyRepository extends JpaRepository<RegisterProperty, String>{
+public interface PropertyRepository extends CrudRepository<RegisterProperty, String> , JpaRepository<RegisterProperty, String>{
 
 	List<RegisterProperty> findByCity(String city);
 

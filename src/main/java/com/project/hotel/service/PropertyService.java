@@ -2,6 +2,8 @@ package com.project.hotel.service;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -15,4 +17,7 @@ public interface PropertyService {
 	public List<String> getAllCity();
 
 	public List<RegisterProperty> getAllProperty();
+
+	public ResponseEntity<Object> updateProperty(String propertyId, @Valid RegisterProperty updatedProp);
+
 }

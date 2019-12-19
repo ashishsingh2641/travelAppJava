@@ -26,6 +26,21 @@ public class PropertyServiceImpl implements PropertyService{
 	}
 	
 	@Override
+	public ResponseEntity<Object> updateProperty(String propertyId, RegisterProperty updatedProp) {
+		System.out.println("Updating Property :- " + updatedProp.getId()+" Owner Name:- "+updatedProp.getOwnerName());
+		boolean returnProp = false;
+		
+		returnProp = this.repository.findById(propertyId).map(property -> {
+			updatedProp.setId(propertyId);
+			return this.repository.save(updatedProp);
+		}).isPresent();
+		
+		if(returnProp)
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		else
+			return new ResponseEntity<Object>(HttpStatus.NOT_MODIFIED);
+	}
+	
 	public List<RegisterProperty> getAllProperty() {
 		return (List<RegisterProperty>)this.repository.findAll();
 	}
