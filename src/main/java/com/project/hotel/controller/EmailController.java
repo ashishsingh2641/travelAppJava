@@ -10,7 +10,7 @@ import com.project.hotel.service.EmailService;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("api/email")
+@RequestMapping("api/notify")
 public class EmailController {
 	
 	private EmailService emailService;
@@ -19,10 +19,10 @@ public class EmailController {
 		this.emailService = emailService;
 	}
 	
-	@PostMapping("/sendEmail")
-	public String sendEmail(@PathVariable String emailMessage) {
-		this.emailService.sendEmail(emailMessage);
-		return emailMessage;
+	@PostMapping("/sendEmail/{userId}")
+	public String sendEmail(@PathVariable String userId) {
+		System.out.println("Email Post Call");
+		return this.emailService.sendEmail(userId);
 	}
 
 }
