@@ -94,7 +94,6 @@ public class UserServiceImpl implements UserService {
 		
 		try {
 			System.out.println("User Name:- " +user.getEmail() );
-			System.out.println("User Password :- " +user.getPassword());
 			System.out.println("User Role :- " +userRepository.findByEmail(user.getEmail()).getRole());
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
 			String jwtToken = jwtTokenProvider.createToken(user.getEmail(), userRepository.findByEmail(user.getEmail()).getRole());
@@ -103,7 +102,7 @@ public class UserServiceImpl implements UserService {
 					.body(jwtToken);
 		} catch (AuthenticationException e) {
 			e.printStackTrace();
-			throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
+			throw new CustomException("Invalid Username/Password Supplied", HttpStatus.UNPROCESSABLE_ENTITY);
 		}
 		
 		/*
