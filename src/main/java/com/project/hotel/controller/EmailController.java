@@ -16,6 +16,7 @@ public class EmailController {
 	private EmailService emailService;
 	
 	public EmailController(EmailService emailService) {
+		System.out.println("Email Controller Constructor");
 		this.emailService = emailService;
 	}
 	

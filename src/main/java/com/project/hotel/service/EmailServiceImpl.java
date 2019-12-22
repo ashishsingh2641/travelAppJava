@@ -48,7 +48,7 @@ public class EmailServiceImpl implements EmailService {
 		 */
 
 
-		javaMailSender.send(mailMessage); }
-
+		javaMailSender.send(mailMessage); 
+	}
 
 }
