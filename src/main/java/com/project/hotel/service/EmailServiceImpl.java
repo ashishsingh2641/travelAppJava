@@ -1,7 +1,5 @@
 package com.project.hotel.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -23,19 +21,19 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override 
-	public String sendEmail(String userId) { 
+	public String sendEmail(String emailId) { 
 		System.out.println("Email Sending ....!!! ");
-		Optional<User> user = userRepo.findById(userId);
-		if(user.isPresent())
-			sendPlainTextMail(userId, user.get());  
+		User user = userRepo.findByEmail(emailId);
+		if(user !=null)
+			sendPlainTextMail(user);  
 		return "Email Sent"; 
 	}
 
-	private void sendPlainTextMail(String userId, User user) { 
+	private void sendPlainTextMail(User user) { 
 		
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		
-		mailMessage.setTo("ashishsingh2641@gmail.com");
+		mailMessage.setTo(user.getEmail());
 		mailMessage.setFrom("pmadhav2498@gmail.com");
 		mailMessage.setSubject("This is A Test Mail");
 		mailMessage.setText("Dear Admin ,"

@@ -20,10 +20,10 @@ public class EmailController {
 		this.emailService = emailService;
 	}
 	
-	@PostMapping("/sendEmail/{userId}")
-	public String sendEmail(@PathVariable String userId) {
+	@PostMapping("/sendEmail/{emailId}")
+	public String sendEmail(@PathVariable String emailId) {
 		System.out.println("Email Post Call");
-		return this.emailService.sendEmail(userId);
+		return this.emailService.sendEmail(emailId);
 	}
 
 }
