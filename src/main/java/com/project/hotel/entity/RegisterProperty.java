@@ -20,6 +20,7 @@ public class RegisterProperty {
 	private String city;
 	private String pinCode;
 	private String state;
+	private String locality;
 	private String landmark;
 	private String imageUrl;
 	private String typeOfProperty;
@@ -85,6 +86,12 @@ public class RegisterProperty {
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	public String getLocality() {
+		return locality;
+	}
+	public void setLocality(String locality) {
+		this.locality = locality;
 	}
 	public String getLandmark() {
 		return landmark;
