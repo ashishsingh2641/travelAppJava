@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/api/property/addProperty").permitAll()//
         .antMatchers(HttpMethod.GET,"/api/property/**").permitAll()//
         .antMatchers(HttpMethod.PUT,"/api/user/**").permitAll()//
-        .antMatchers("/api/notify/sendEmail").permitAll()//
+        .antMatchers("/api/notify/sendEmail/**").permitAll()//
         // Disallow everything else..
         .anyRequest().authenticated();
 
