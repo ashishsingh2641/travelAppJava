@@ -39,6 +39,8 @@ public class RegisterProperty {
 	private boolean tv;
 	private boolean powerBackUp;
 	
+	private String userId;
+	
 	public String getId() {
 		return id;
 	}
@@ -194,6 +196,12 @@ public class RegisterProperty {
 	}
 	public void setPowerBackUp(boolean powerBackUp) {
 		this.powerBackUp = powerBackUp;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

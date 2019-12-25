@@ -15,4 +15,6 @@ public interface PropertyRepository extends CrudRepository<RegisterProperty, Str
 	@Query("SELECT DISTINCT rp.city FROM RegisterProperty rp")
 	List<String> findDistinctCity();
 
+	List<RegisterProperty> findByUserId(String userId);
+
 }

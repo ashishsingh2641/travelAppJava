@@ -26,9 +26,9 @@ public class PropertyControllerImpl implements PropertyController{
 	}
 
 	@Override
-	@PostMapping("/addProperty")
-	public ResponseEntity<Object> addProperty(@Valid @RequestBody RegisterProperty prop) {
-		return service.addProperty(prop);
+	@PostMapping("/addProperty/{userName}")
+	public ResponseEntity<Object> addProperty(@PathVariable String userName, @Valid @RequestBody RegisterProperty prop) {
+		return service.addProperty(userName,prop);
 	}
 	
 	@PutMapping("/updateProperty/{propertyId}")
@@ -37,21 +37,26 @@ public class PropertyControllerImpl implements PropertyController{
 		return service.updateProperty(propertyId,updatedProp);
 	}
 	
-	@GetMapping({ "/getAllProperty" })
+	@GetMapping("/getAllProperty")
 	public List<RegisterProperty> getAllProperty() {
 		return (List<RegisterProperty>)this.service.getAllProperty();
 	}
 
 	@Override
-	@GetMapping({ "/getAllProperty/{city}" })
+	@GetMapping("/getAllProperty/{city}")
 	public List<RegisterProperty> getAllProperty(@PathVariable String city) {
 		return (List<RegisterProperty>)this.service.getAllProperty(city);
 	}
 
 	@Override
-	@GetMapping({ "/getAllCity" })
+	@GetMapping("/getAllCity")
 	public List<String> getAllCity() {
 		return (List<String>)this.service.getAllCity();
+	}
+	
+	@GetMapping("/getPropertyListByUserName")
+	public List<RegisterProperty> getPropertyListByUserName(@PathVariable String userName) {
+		return (List<RegisterProperty>)this.service.getPropertyListByUserName(userName);
 	}
 
 }

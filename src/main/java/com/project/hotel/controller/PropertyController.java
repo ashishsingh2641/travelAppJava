@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.project.hotel.entity.RegisterProperty;
 
 public interface PropertyController {
-	public ResponseEntity<Object> addProperty(@RequestBody RegisterProperty prop);
+	public ResponseEntity<Object> addProperty(@PathVariable String userName ,@RequestBody RegisterProperty prop);
 	
 	List<RegisterProperty> getAllProperty(@PathVariable final String city);
     

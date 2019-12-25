@@ -33,8 +33,7 @@ public class EmailServiceImpl implements EmailService {
 		
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		
-		//mailMessage.setTo(user.getEmail());
-		mailMessage.setTo("pmadhav2498@gmail.com");
+		mailMessage.setTo(user.getEmail());
 		mailMessage.setFrom("pmadhav2498@gmail.com");
 		mailMessage.setSubject("In Land Booking Confirmation .");
 		mailMessage.setText("Dear Customer , "+ '\n'+'\n'

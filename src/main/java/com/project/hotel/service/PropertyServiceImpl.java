@@ -8,20 +8,28 @@ import org.springframework.stereotype.Service;
 
 import com.project.hotel.entity.RegisterProperty;
 import com.project.hotel.repository.PropertyRepository;
+import com.project.hotel.repository.UserRepository;
 
 @Service
 public class PropertyServiceImpl implements PropertyService{
 
 	private PropertyRepository repository;
 	
+	private UserRepository userRepo;
+	
 	public PropertyServiceImpl(PropertyRepository repository) {
 		this.repository=repository;
 	}
 
 	@Override
-	public ResponseEntity<Object> addProperty(RegisterProperty prop) {
-		System.out.println("+++++++++++" + prop.getAddress1());
+	public ResponseEntity<Object> addProperty(String userName, RegisterProperty prop) {
+		System.out.println("User "+ userName +" adding new property " + prop.getAddress1());
+
+		if(userName!=null)
+			prop.setUserId(userRepo.findByEmail(userName).getId());
+
 		repository.save(prop);
+
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 	
@@ -53,6 +61,11 @@ public class PropertyServiceImpl implements PropertyService{
 	@Override
 	public List<String> getAllCity() {
 		return (List<String>)this.repository.findDistinctCity();
+	}
+
+	@Override
+	public List<RegisterProperty> getPropertyListByUserName(String userName) {
+		return this.repository.findByUserId(userRepo.findByEmail(userName).getId());
 	}
 	
 }
