@@ -23,4 +23,6 @@ public interface PropertyService {
 
 	public List<RegisterProperty> getPropertyListByUserName(String userName);
 
+	public void deletePropertyById(String propertyId);
+
 }

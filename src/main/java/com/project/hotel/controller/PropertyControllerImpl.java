@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,6 +58,11 @@ public class PropertyControllerImpl implements PropertyController{
 	@GetMapping("/getPropertyListByUserName")
 	public List<RegisterProperty> getPropertyListByUserName(@PathVariable String userName) {
 		return (List<RegisterProperty>)this.service.getPropertyListByUserName(userName);
+	}
+	
+	@DeleteMapping("/deletePropertyById/{propertyId}")
+	public void deletePropertyById(@PathVariable String propertyId) {
+		this.service.deletePropertyById(propertyId);
 	}
 
 }

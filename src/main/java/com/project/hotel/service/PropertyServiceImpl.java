@@ -67,5 +67,10 @@ public class PropertyServiceImpl implements PropertyService{
 	public List<RegisterProperty> getPropertyListByUserName(String userName) {
 		return this.repository.findByUserId(userRepo.findByEmail(userName).getId());
 	}
+
+	@Override
+	public void deletePropertyById(String propertyId) {
+		this.repository.deleteById(propertyId);		
+	}
 	
 }
