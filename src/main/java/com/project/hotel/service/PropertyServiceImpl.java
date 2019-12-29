@@ -64,7 +64,7 @@ public class PropertyServiceImpl implements PropertyService{
 	}
 
 	@Override
-	public List<RegisterProperty> getPropertyListByUserName(String userName) {
+	public List<RegisterProperty> getPropDetailsByUser(String userName) {
 		return this.repository.findByUserId(userRepo.findByEmail(userName).getId());
 	}
 

@@ -21,7 +21,7 @@ public interface PropertyService {
 
 	public ResponseEntity<Object> updateProperty(String propertyId, @Valid RegisterProperty updatedProp);
 
-	public List<RegisterProperty> getPropertyListByUserName(String userName);
+	public List<RegisterProperty> getPropDetailsByUser(String userName);
 
 	public void deletePropertyById(String propertyId);
 
