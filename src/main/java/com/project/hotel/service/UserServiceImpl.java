@@ -73,6 +73,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public ResponseEntity<String> changePassword(String userId, String latestPassword) {
+		
 		Optional<User> returnUser = this.userRepository.findById(userId).map(user -> {
 			user.setPassword(passwordEncoder.encode(latestPassword));
 			return this.userRepository.save(user);

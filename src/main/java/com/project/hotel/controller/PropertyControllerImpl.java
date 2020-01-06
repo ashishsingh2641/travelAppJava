@@ -55,7 +55,7 @@ public class PropertyControllerImpl implements PropertyController{
 		return (List<String>)this.service.getAllCity();
 	}
 	
-	@GetMapping("/getPropDetailsByUser")
+	@GetMapping("/getPropDetailsByUser/{userName}")
 	public List<RegisterProperty> getPropDetailsByUser(@PathVariable String userName) {
 		return (List<RegisterProperty>)this.service.getPropDetailsByUser(userName);
 	}
