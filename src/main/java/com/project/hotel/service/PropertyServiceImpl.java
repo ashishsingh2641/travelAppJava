@@ -2,6 +2,7 @@ package com.project.hotel.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ public class PropertyServiceImpl implements PropertyService{
 
 	private PropertyRepository repository;
 	
+	@Autowired
 	private UserRepository userRepo;
 	
 	public PropertyServiceImpl(PropertyRepository repository) {
