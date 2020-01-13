@@ -23,9 +23,14 @@ public class EmailServiceImpl implements EmailService {
 	@Override 
 	public String sendEmail(String emailId) { 
 		System.out.println("Email Sending ....!!! ");
+		
 		User user = userRepo.findByEmail(emailId);
-		if(user !=null)
-			sendPlainTextMail(user);  
+		
+		if(user !=null) {
+			sendPlainTextMail(user);
+			sendMailToAdmin(user);
+		}
+			
 		return "Email Sent"; 
 	}
 
@@ -34,7 +39,7 @@ public class EmailServiceImpl implements EmailService {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		
 		mailMessage.setTo(user.getEmail());
-		mailMessage.setFrom("pmadhav2498@gmail.com");
+		mailMessage.setFrom("inlandhouse24@gmail.com");
 		mailMessage.setSubject("In Land Booking Confirmation .");
 		mailMessage.setText("Dear Customer , "+ '\n'+'\n'
 				+ "Welcome to IN LAND ... !!! "+ '\n' 
@@ -61,9 +66,30 @@ public class EmailServiceImpl implements EmailService {
 		 * mailMessage.setCc(eParams.getCc().toArray(new
 		 * String[eParams.getCc().size()])); }
 		 */
-
-
 		javaMailSender.send(mailMessage); 
+	}
+	
+	private void sendMailToAdmin(User user) { 
+		
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		
+		mailMessage.setTo("inlandhouse24@gmail.com");
+		mailMessage.setFrom("inlandhouse24@gmail.com");
+		mailMessage.setSubject("Customer "+user.getFirstName()+" "+user.getLastName()+" has booked the Property");
+		mailMessage.setText("Dear Admin , "+ '\n'+'\n'
+				+ "Please find the details ... !!! "+ '\n' 
+				+ "Customer "+user.getFirstName()+" "+user.getLastName()+" booked the Property " + '\n'+'\n'
+				+ "Mobile Number :- "+user.getPhnNumber()+ '\n'
+				+ "Email Id :- "+user.getEmail()+ '\n'
+				+ "Thanks & Regards, "+ '\n'
+				+ "IN LAND Team");		
+				
+		javaMailSender.send(mailMessage); 
+	}
+
+	@Override
+	public String customerBooking(String emailId) {
+		return null;
 	}
 
 }

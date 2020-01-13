@@ -25,5 +25,11 @@ public class EmailController {
 		System.out.println("Email Post Call");
 		return this.emailService.sendEmail(emailId);
 	}
+	
+	@PostMapping("/customerbooking/{emailId}")
+	public String customerBooking(@PathVariable String emailId) {
+		System.out.println("Email Post Call");
+		return this.emailService.customerBooking(emailId);
+	}
 
 }
