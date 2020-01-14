@@ -21,8 +21,12 @@ public class CustomerBooking {
 	@JoinColumn(name = "customer_id")
 	private User customerId;
 	
+	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+	@JoinColumn(name = "property_id")
+	private RegisterProperty propertyId;
+	
 	private String bookingStatus;
-
+	
 	public String getId() {
 		return id;
 	}
@@ -39,6 +43,14 @@ public class CustomerBooking {
 		this.customerId = customerId;
 	}
 
+	public RegisterProperty getPropertyId() {
+		return propertyId;
+	}
+
+	public void setPropertyId(RegisterProperty propertyId) {
+		this.propertyId = propertyId;
+	}
+
 	public String getBookingStatus() {
 		return bookingStatus;
 	}
@@ -46,6 +58,5 @@ public class CustomerBooking {
 	public void setBookingStatus(String bookingStatus) {
 		this.bookingStatus = bookingStatus;
 	}
-		
-
+	
 }
