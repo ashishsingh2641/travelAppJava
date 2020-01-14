@@ -3,6 +3,8 @@ package com.project.hotel.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -103,6 +105,22 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	public List<CustomerBooking> getAllCustomerBookings() {
 		return custBookRepo.findAll();
+	}
+
+	@Override
+	public ResponseEntity<Object> updateCustomerBooking(String bookingId, String bookingStatus) {
+		
+		boolean returnCustBooking = false;
+		
+		returnCustBooking = this.custBookRepo.findById(bookingId).map(custBooking -> {
+			custBooking.setBookingStatus(bookingStatus);
+			return this.custBookRepo.save(custBooking);
+		}).isPresent();
+		
+		if(returnCustBooking)
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		else
+			return new ResponseEntity<Object>(HttpStatus.NOT_MODIFIED);
 	}
 
 }
