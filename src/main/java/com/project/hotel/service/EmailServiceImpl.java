@@ -96,7 +96,6 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	public CustomerBooking customerBooking(String emailId, CustomerBooking custBook) {
-		
 		custBook.setCustomerId(userRepo.findByEmail(emailId));
 		return custBookRepo.save(custBook);
 	}

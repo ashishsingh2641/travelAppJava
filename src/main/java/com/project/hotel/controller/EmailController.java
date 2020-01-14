@@ -38,7 +38,7 @@ public class EmailController {
 	}
 	
 	@GetMapping("/getAllCustBookings")
-	public List<CustomerBooking> getAllCustomerBookings(){
+	public List<CustomerBooking> getAllCustomerBookings() {
 		return this.emailService.getAllCustomerBookings();
 	}
 
