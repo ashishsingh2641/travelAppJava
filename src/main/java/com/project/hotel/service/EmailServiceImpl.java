@@ -1,11 +1,15 @@
 package com.project.hotel.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.project.hotel.entity.CustomerBooking;
 import com.project.hotel.entity.User;
+import com.project.hotel.repository.CustomerBookingRepo;
 import com.project.hotel.repository.UserRepository;
 
 @Service
@@ -15,6 +19,9 @@ public class EmailServiceImpl implements EmailService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private CustomerBookingRepo custBookRepo;
 
 	public EmailServiceImpl(JavaMailSender javaMailSender) { 
 		this.javaMailSender = javaMailSender; 
@@ -88,8 +95,15 @@ public class EmailServiceImpl implements EmailService {
 	}
 
 	@Override
-	public String customerBooking(String emailId) {
-		return null;
+	public CustomerBooking customerBooking(String emailId, CustomerBooking custBook) {
+		
+		custBook.setCustomerId(userRepo.findByEmail(emailId));
+		return custBookRepo.save(custBook);
+	}
+
+	@Override
+	public List<CustomerBooking> getAllCustomerBookings() {
+		return custBookRepo.findAll();
 	}
 
 }

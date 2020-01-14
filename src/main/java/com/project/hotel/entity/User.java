@@ -21,9 +21,8 @@ public class User {
 	private String lastName;
 	private String role;
 	private String phnNumber;
-	
+
 	@JsonIgnore
-	@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	private String email;
 	
