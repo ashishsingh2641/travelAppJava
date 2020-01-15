@@ -1,44 +1,99 @@
 package com.project.hotel.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Table(name="register_property")
 public class RegisterProperty {
 	
 	@Id 
 	@GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@Column(name = "id")
 	private String id;
+	
+	@Column(name = "owner_name")
 	private String ownerName;
+	
+	@Column(name = "owner_mobile_no")
 	private String ownerMobileNo;
+	
+	@Column(name = "address1")
 	private String address1;
+	
+	@Column(name = "address2")
 	private String address2;
+	
+	@Column(name = "city")
 	private String city;
+	
+	@Column(name = "pin_code")
 	private String pinCode;
+	
+	@Column(name = "state")
 	private String state;
+	
+	@Column(name = "locality")
 	private String locality;
+	
+	@Column(name = "landmark")
 	private String landmark;
+	
+	@Column(name = "image_url")
 	private String imageUrl;
+	
+	@Column(name = "type_of_property")
 	private String typeOfProperty;
+	
+	@Column(name = "sell")
 	private boolean sell;
+	
+	@Column(name = "rent")
 	private boolean rent;
+	
+	@Column(name = "price")
 	private double price;
+	
+	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "semi_furnished")
 	private boolean semiFurnished;
+	
+	@Column(name = "full_furnished")
 	private boolean fullFurnished;
+	
+	@Column(name = "un_furnished")
 	private boolean unFurnished;
+	
+	@Column(name = "ac")
 	private boolean ac;
+	
+	@Column(name = "non_ac")
 	private boolean nonAc;
+	
+	@Column(name = "wifi")
 	private boolean wifi;
+	
+	@Column(name = "parking")
 	private boolean parking;
+	
+	@Column(name = "lift")
 	private boolean lift;
+	
+	@Column(name = "tv")
 	private boolean tv;
+	
+	@Column(name = "power_back_up")
 	private boolean powerBackUp;
 	
+	@Column(name = "user_id")
 	private String userId;
 	
 	public String getId() {
