@@ -36,7 +36,10 @@ public class EmailServiceImpl implements EmailService {
 		User user = userRepo.findByEmail(emailId);
 		
 		if(user !=null) {
-			sendPlainTextMail(user);
+			//sendPlainTextMail(user);
+			sendPlainTextMailNewBookingRequest(user);
+			//sendPlainTextMailNewBookingConfirmation(user);
+			//sendPlainTextMailNewBookingCancellation(user);
 			sendMailToAdmin(user);
 		}
 			
@@ -81,17 +84,23 @@ public class EmailServiceImpl implements EmailService {
 	private void sendMailToAdmin(User user) { 
 		
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		
 		mailMessage.setTo("inlandhouse24@gmail.com");
 		mailMessage.setFrom("inlandhouse24@gmail.com");
-		mailMessage.setSubject("Customer "+user.getFirstName()+" "+user.getLastName()+" has booked the Property");
+		mailMessage.setSubject("*** ALERT, New Booking Request**** | User "+user.getFirstName()+" "+user.getLastName()+" has Requested for Property");
 		mailMessage.setText("Dear Admin , "+ '\n'+'\n'
-				+ "Please find the details ... !!! "+ '\n' 
-				+ "Customer "+user.getFirstName()+" "+user.getLastName()+" booked the Property " + '\n'+'\n'
-				+ "Mobile Number :- "+user.getPhnNumber()+ '\n'
-				+ "Email Id :- "+user.getEmail()+ '\n'
+				+ "New Property Booking Request is raised, below are the requested details. Kindly Start working on the Request, Contact to Property Owner & and Provide further updates to Customer. "+ '\n'+'\n' 
+				+ "********* Customer Details **************" + '\n'
+				+ "Property Requested By (Customer) : "+user.getFirstName()+" "+user.getLastName()+" "+ '\n'
+				+ "Customer Contact No. :- "+user.getPhnNumber()+ '\n'
+				+ "Customer Email :- "+user.getEmail()+ '\n'+'\n'
+				+ "********* Property Owner Details ********" + '\n'
+				+ "Property Owner Name : " +'\n'
+				+ "Propery Owner Contact No. : "+ '\n'
+				+ "Property Owner Email : " +'\n'+'\n'
+				+ "######## More Property Details Visit Booking History in App ######"+'\n'+'\n'
+				+ "------ Note : To Serve better Service, Notify Customer ASAP  ------" +'\n'+'\n'
 				+ "Thanks & Regards, "+ '\n'
-				+ "IN LAND Team");		
+				+ "InLand Team");		
 				
 		javaMailSender.send(mailMessage); 
 	}
@@ -122,5 +131,48 @@ public class EmailServiceImpl implements EmailService {
 		else
 			return new ResponseEntity<Object>(HttpStatus.NOT_MODIFIED);
 	}
-
+	//Sunil added
+	private void sendPlainTextMailNewBookingRequest(User user) { 
+			
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			mailMessage.setTo(user.getEmail());
+			mailMessage.setFrom("inlandhouse24@gmail.com");
+			mailMessage.setSubject("***** New Property Booking Request ******* #");
+			mailMessage.setText("Dear User , "+ '\n'+'\n'
+					+ "Thanks for Using InLand Service"+ '\n'+'\n' 
+					+ "Your Booking process is in progress InLand Team is working on your request. \n You will be receiving email notification shortly from InLand Admin Team." + '\n'+'\n'
+					+ "Thanks & Regards, "+ '\n'
+					+ "InLand Team");
+			javaMailSender.send(mailMessage); 
+		}
+	
+	private void sendPlainTextMailNewBookingConfirmation(User user) { 
+		
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		
+		mailMessage.setTo(user.getEmail());
+		mailMessage.setFrom("inlandhouse24@gmail.com");
+		mailMessage.setSubject("***** Booking Confirmation *******");
+		mailMessage.setText("Dear User , "+ '\n'+'\n'
+				+ "Congratulations!! "+ '\n' 
+				+ "*********** Your Booking has been confirmed **********" + '\n'+'\n'
+				+ "Thanks & Regards, "+ '\n'
+				+ "InLand Team");
+		javaMailSender.send(mailMessage); 
+	}
+	
+	private void sendPlainTextMailNewBookingCancellation(User user) { 
+		
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		
+		mailMessage.setTo(user.getEmail());
+		mailMessage.setFrom("inlandhouse24@gmail.com");
+		mailMessage.setSubject("***** Booking Cancellation *******");
+		mailMessage.setText("Dear User , "+ '\n'+'\n'
+				+ "Unfortunately we couldn't book your requested property so cancelling your booking !! "+ '\n' 
+				+ "Try next time we will server you better Service" + '\n'+'\n'
+				+ "Thanks & Regards, "+ '\n'
+				+ "InLand Team");
+		javaMailSender.send(mailMessage); 
+	}
 }

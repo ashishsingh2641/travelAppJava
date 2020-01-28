@@ -151,4 +151,25 @@ public class UserServiceImpl implements UserService {
 				.body("Not Valid Email");
 	}
 
+	@Override
+	public User retreiveUserByUserId(String userId) {
+		return userRepository.findById(userId).orElse(new User());
+	}
+
+	@Override
+	public ResponseEntity<User> updateRegister(User user) {
+		User usr = userRepository.save(user);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("user","success update");
+		return ResponseEntity.status(HttpStatus.OK)
+				.headers(responseHeaders)
+				.body(usr);
+		
+	}
+
+	@Override
+	public User retreiveUserByEmail(String email) {
+		return userRepository.findByEmail(email);
+	}
+
 }

@@ -1,5 +1,7 @@
 package com.project.hotel.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +38,27 @@ public class User {
 	
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "gender")
+	private String gender;
+	
+	@Column(name = "dob")
+	private Date dob;
+	
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "city")
+	private String city;
+	
+	@Column(name = "pin_code")
+	private String pinCode;
+	
+	@Column(name = "state")
+	private String state;
+	
+	@Column(name = "image_url")
+	private String imageUrl;
 	
 	public User() {
 	}
@@ -81,6 +104,62 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getPinCode() {
+		return pinCode;
+	}
+
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 }

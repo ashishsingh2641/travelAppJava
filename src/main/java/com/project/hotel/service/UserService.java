@@ -17,5 +17,12 @@ public interface UserService {
 	public List<User> getAllUsers();
 
 	public ResponseEntity<String> getEmail(String emailId);
+
+	//by sunil
+	public User retreiveUserByUserId(String userId);
+
+	public ResponseEntity<User> updateRegister(User user);
+
+	public User retreiveUserByEmail(String email);
 	
 }
