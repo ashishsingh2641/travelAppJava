@@ -29,6 +29,9 @@ public class PropertyControllerImpl implements PropertyController{
 	@Override
 	@PostMapping("/addProperty/{userName}")
 	public ResponseEntity<Object> addProperty(@PathVariable String userName, @Valid @RequestBody RegisterProperty prop) {
+		
+		System.out.println("prop----:"+prop.getAddress1()+ " < --------- > "+prop);
+		
 		return service.addProperty(userName,prop);
 	}
 	

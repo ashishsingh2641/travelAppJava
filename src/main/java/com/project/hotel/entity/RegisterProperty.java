@@ -96,6 +96,12 @@ public class RegisterProperty {
 	@Column(name = "user_id")
 	private String userId;
 	
+	@Column(name="near_by")
+	private String nearBy;
+	
+	@Column(name="build_area")
+	private int builtArea;
+	
 	public String getId() {
 		return id;
 	}
@@ -258,5 +264,17 @@ public class RegisterProperty {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
+	public String getNearBy() {
+		return nearBy;
+	}
+	public void setNearBy(String nearBy) {
+		this.nearBy = nearBy;
+	}
+	public int getBuiltArea() {
+		return builtArea;
+	}
+	public void setBuiltArea(int builtArea) {
+		this.builtArea = builtArea;
+	}
+	
 }

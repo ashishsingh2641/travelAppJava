@@ -54,14 +54,7 @@ public class UserControllerImpl implements UserController{
 		return service.getAllUsers();
 	}
 	
-	//Get User by userId
-	
-	/*
-	 * @GetMapping("/user/{userId}") public User getUserByUserId(@PathVariable
-	 * String userId) { return service.retreiveUserByUserId(userId); }
-	 */
-	
-	@GetMapping("/user/{email}")
+	@GetMapping("/getUserData/{email}")
 	public User getUserByEmail(@PathVariable String email) {
 		return service.retreiveUserByEmail(email);
 	}
@@ -71,8 +64,5 @@ public class UserControllerImpl implements UserController{
 	public ResponseEntity<User> userUpdate(@RequestBody User user) {
 		return service.updateRegister(user);
 	}
-	
-	
-	
 
 }
