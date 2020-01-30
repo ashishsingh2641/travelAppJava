@@ -20,13 +20,13 @@ import com.project.hotel.repository.UserRepository;
 public class EmailServiceImpl implements EmailService {
 
 	private JavaMailSender javaMailSender;
-	
+
 	@Autowired
 	private UserRepository userRepo;
-	
+
 	@Autowired
 	private CustomerBookingRepo custBookRepo;
-	
+
 	@Autowired
 	private PropertyRepository propertyRepo;
 
@@ -37,10 +37,10 @@ public class EmailServiceImpl implements EmailService {
 	@Override 
 	public String sendEmail(String emailId, String propertyId) { 
 		System.out.println("Email Sending ....!!! ");
-		
+
 		User user = userRepo.findByEmail(emailId);
 		PropertySummary propSumry = propertyRepo.findByPropertyId(propertyId);
-		
+
 		if(user !=null) {
 			//sendPlainTextMail(user);
 			sendPlainTextMailNewBookingRequest(user);
@@ -48,14 +48,14 @@ public class EmailServiceImpl implements EmailService {
 			//sendPlainTextMailNewBookingCancellation(user);
 			sendMailToAdmin(user,propSumry);
 		}
-			
+
 		return "Email Sent"; 
 	}
 
 	private void sendPlainTextMail(User user) { 
-		
+
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		
+
 		mailMessage.setTo(user.getEmail());
 		mailMessage.setFrom("inlandhouse24@gmail.com");
 		mailMessage.setSubject("In Land Booking Confirmation .");
@@ -64,11 +64,11 @@ public class EmailServiceImpl implements EmailService {
 				+ "Your Booking has been confirmed, Our Respective Executive will be in touch with you for further discussion. " + '\n'+'\n'
 				+ "Thanks & Regards, "+ '\n'
 				+ "IN LAND Team");
-		
-				
-				// + "User "+ user.getFirstName()+" "+user.getLastName()+" has booked the property ... !!! "
-				// + "Mobile Number :- "+user.getPhnNumber()
-				// + "Email Id :- "+user.getEmail());
+
+
+		// + "User "+ user.getFirstName()+" "+user.getLastName()+" has booked the property ... !!! "
+		// + "Mobile Number :- "+user.getPhnNumber()
+		// + "Email Id :- "+user.getEmail());
 
 		/*
 		 * eParams.getTo().toArray(new String[eParams.getTo().size()]);
@@ -86,9 +86,9 @@ public class EmailServiceImpl implements EmailService {
 		 */
 		javaMailSender.send(mailMessage); 
 	}
-	
+
 	private void sendMailToAdmin(User user,PropertySummary propSumry) { 
-		
+
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo("inlandhouse24@gmail.com");
 		mailMessage.setFrom("inlandhouse24@gmail.com");
@@ -100,14 +100,14 @@ public class EmailServiceImpl implements EmailService {
 				+ "Customer Contact No. :- "+user.getPhnNumber()+ '\n'
 				+ "Customer Email :- "+user.getEmail()+ '\n'+'\n'+'\n'
 				+ "********* Property Owner Details ********" + '\n'
-				+ "Property Owner Name : " +propSumry.getOwnerName()+'\n'
-				+ "Propery Owner Contact No. : "+propSumry.getOwnerMobileNo()+'\n'
-				+ "Property Owner Email : " +propSumry.getOwnerEmail()+ '\n'+'\n'
+				+ "Property Owner Name :- " +propSumry.getOwnerName()+'\n'
+				+ "Propery Owner Contact No. :- "+propSumry.getOwnerMobileNo()+'\n'
+				+ "Property Owner Email :- " +propSumry.getOwnerEmail()+ '\n'+'\n'
 				+ "######## More Property Details Visit Booking History in App ######"+'\n'+'\n'
 				+ "------ Note : To Serve better Service, Notify Customer ASAP  ------" +'\n'+'\n'
 				+ "Thanks & Regards, "+ '\n'
 				+ "InLand Team");		
-				
+
 		javaMailSender.send(mailMessage); 
 	}
 
@@ -124,14 +124,14 @@ public class EmailServiceImpl implements EmailService {
 
 	@Override
 	public ResponseEntity<Object> updateCustomerBooking(String bookingId, String bookingStatus) {
-		
+
 		boolean returnCustBooking = false;
-		
+
 		returnCustBooking = this.custBookRepo.findById(bookingId).map(custBooking -> {
 			custBooking.setBookingStatus(bookingStatus);
 			return this.custBookRepo.save(custBooking);
 		}).isPresent();
-		
+
 		if(returnCustBooking)
 			return new ResponseEntity<Object>(HttpStatus.OK);
 		else
@@ -139,23 +139,23 @@ public class EmailServiceImpl implements EmailService {
 	}
 	//Sunil added
 	private void sendPlainTextMailNewBookingRequest(User user) { 
-			
-			SimpleMailMessage mailMessage = new SimpleMailMessage();
-			mailMessage.setTo(user.getEmail());
-			mailMessage.setFrom("inlandhouse24@gmail.com");
-			mailMessage.setSubject("***** New Property Booking Request ******* #");
-			mailMessage.setText("Dear User , "+ '\n'+'\n'
-					+ "Thanks for Using InLand Service"+ '\n'+'\n' 
-					+ "Your Booking process is in progress InLand Team is working on your request. \n You will be receiving email notification shortly from InLand Admin Team." + '\n'+'\n'
-					+ "Thanks & Regards, "+ '\n'
-					+ "InLand Team");
-			javaMailSender.send(mailMessage); 
-		}
-	
-	private void sendPlainTextMailNewBookingConfirmation(User user) { 
-		
+
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		
+		mailMessage.setTo(user.getEmail());
+		mailMessage.setFrom("inlandhouse24@gmail.com");
+		mailMessage.setSubject("***** New Property Booking Request ******* #");
+		mailMessage.setText("Dear User , "+ '\n'+'\n'
+				+ "Thanks for Using InLand Service"+ '\n'+'\n' 
+				+ "Your Booking process is in progress InLand Team is working on your request. \n You will be receiving email notification shortly from InLand Admin Team." + '\n'+'\n'
+				+ "Thanks & Regards, "+ '\n'
+				+ "InLand Team");
+		javaMailSender.send(mailMessage); 
+	}
+
+	private void sendPlainTextMailNewBookingConfirmation(User user) { 
+
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+
 		mailMessage.setTo(user.getEmail());
 		mailMessage.setFrom("inlandhouse24@gmail.com");
 		mailMessage.setSubject("***** Booking Confirmation *******");
@@ -166,11 +166,11 @@ public class EmailServiceImpl implements EmailService {
 				+ "InLand Team");
 		javaMailSender.send(mailMessage); 
 	}
-	
+
 	private void sendPlainTextMailNewBookingCancellation(User user) { 
-		
+
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		
+
 		mailMessage.setTo(user.getEmail());
 		mailMessage.setFrom("inlandhouse24@gmail.com");
 		mailMessage.setSubject("***** Booking Cancellation *******");
