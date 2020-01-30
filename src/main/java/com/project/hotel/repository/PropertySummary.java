@@ -2,7 +2,7 @@ package com.project.hotel.repository;
 
 public interface PropertySummary {
 
-	 String getOwnerName();
-	 String getOwnerMobileNo();
-	 String getOwnerEmail();
+	public String getOwnerName();
+	public String getOwnerMobileNo();
+	public String getOwnerEmail();
 }

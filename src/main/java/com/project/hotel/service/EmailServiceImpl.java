@@ -40,6 +40,8 @@ public class EmailServiceImpl implements EmailService {
 
 		User user = userRepo.findByEmail(emailId);
 		PropertySummary propSumry = propertyRepo.findByPropertyId(propertyId);
+		
+		System.out.println(propSumry.getOwnerName()+" -----------> "+propSumry.getOwnerMobileNo());
 
 		if(user !=null) {
 			//sendPlainTextMail(user);
