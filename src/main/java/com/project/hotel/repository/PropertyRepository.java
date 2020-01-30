@@ -18,7 +18,7 @@ public interface PropertyRepository extends CrudRepository<RegisterProperty, Str
 
 	List<RegisterProperty> findByUserId(String userId);
 	
-	@Query("SELECT rp.ownerName, rp.ownerMobileNo, rp.ownerEmail FROM RegisterProperty rp where id=: propertyId")
+	@Query("SELECT rp.ownerName, rp.ownerMobileNo, rp.ownerEmail FROM RegisterProperty rp where rp.id = :propertyId")
 	PropertySummary findByPropertyId(@Param("propertyId") String propertyId);
 
 }
