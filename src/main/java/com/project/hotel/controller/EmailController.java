@@ -27,14 +27,15 @@ public class EmailController {
 		this.emailService = emailService;
 	}
 	
-	@PostMapping("/sendEmail/{emailId}")
-	public String sendEmail(@PathVariable String emailId) {
+	@PostMapping("/sendEmail/{emailId}/{propertyId}")
+	public String sendEmail(@PathVariable String emailId, @PathVariable String propertyId) {
 		System.out.println("Email Post Call");
-		return this.emailService.sendEmail(emailId);
+		return this.emailService.sendEmail(emailId,propertyId);
 	}
 	
 	@PostMapping("/customerbooking/{emailId}")
-	public CustomerBooking customerBooking(@PathVariable String emailId, @RequestBody CustomerBooking custBook) {
+	public CustomerBooking customerBooking(@PathVariable String emailId, 
+			@RequestBody CustomerBooking custBook) {
 		System.out.println("Customer Booking");
 		return this.emailService.customerBooking(emailId,custBook);
 	}

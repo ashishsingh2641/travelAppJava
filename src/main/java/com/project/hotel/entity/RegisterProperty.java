@@ -24,6 +24,9 @@ public class RegisterProperty {
 	@Column(name = "owner_mobile_no")
 	private String ownerMobileNo;
 	
+	@Column(name="owner_email")
+	private String ownerEmail;
+	
 	@Column(name = "address1")
 	private String address1;
 	
@@ -119,6 +122,12 @@ public class RegisterProperty {
 	}
 	public void setOwnerMobileNo(String ownerMobileNo) {
 		this.ownerMobileNo = ownerMobileNo;
+	}
+	public String getOwnerEmail() {
+		return ownerEmail;
+	}
+	public void setOwnerEmail(String ownerEmail) {
+		this.ownerEmail = ownerEmail;
 	}
 	public String getAddress1() {
 		return address1;

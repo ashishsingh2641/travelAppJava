@@ -27,9 +27,10 @@ public class PropertyServiceImpl implements PropertyService{
 	public ResponseEntity<Object> addProperty(String userName, RegisterProperty prop) {
 		System.out.println("User "+ userName +" adding new property " + prop.getAddress1());
 
-		if(userName!=null)
+		if(userName!=null) {
+			prop.setOwnerEmail(userName);
 			prop.setUserId(userRepo.findByEmail(userName).getId());
-
+		}
 		repository.save(prop);
 
 		return new ResponseEntity<Object>(HttpStatus.OK);

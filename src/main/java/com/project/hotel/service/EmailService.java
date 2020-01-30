@@ -8,7 +8,7 @@ import com.project.hotel.entity.CustomerBooking;
 
 public interface EmailService {
 	
-	String sendEmail(String emailId);
+	String sendEmail(String emailId, String propertyId);
 
 	CustomerBooking customerBooking(String emailId, CustomerBooking custBook);
 

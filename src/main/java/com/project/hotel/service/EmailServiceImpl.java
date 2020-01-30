@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.project.hotel.entity.CustomerBooking;
 import com.project.hotel.entity.User;
 import com.project.hotel.repository.CustomerBookingRepo;
+import com.project.hotel.repository.PropertyRepository;
+import com.project.hotel.repository.PropertySummary;
 import com.project.hotel.repository.UserRepository;
 
 @Service
@@ -24,23 +26,27 @@ public class EmailServiceImpl implements EmailService {
 	
 	@Autowired
 	private CustomerBookingRepo custBookRepo;
+	
+	@Autowired
+	private PropertyRepository propertyRepo;
 
 	public EmailServiceImpl(JavaMailSender javaMailSender) { 
 		this.javaMailSender = javaMailSender; 
 	}
 
 	@Override 
-	public String sendEmail(String emailId) { 
+	public String sendEmail(String emailId, String propertyId) { 
 		System.out.println("Email Sending ....!!! ");
 		
 		User user = userRepo.findByEmail(emailId);
+		PropertySummary propSumry = propertyRepo.findByPropertyId(propertyId);
 		
 		if(user !=null) {
 			//sendPlainTextMail(user);
 			sendPlainTextMailNewBookingRequest(user);
 			//sendPlainTextMailNewBookingConfirmation(user);
 			//sendPlainTextMailNewBookingCancellation(user);
-			sendMailToAdmin(user);
+			sendMailToAdmin(user,propSumry);
 		}
 			
 		return "Email Sent"; 
@@ -81,7 +87,7 @@ public class EmailServiceImpl implements EmailService {
 		javaMailSender.send(mailMessage); 
 	}
 	
-	private void sendMailToAdmin(User user) { 
+	private void sendMailToAdmin(User user,PropertySummary propSumry) { 
 		
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setTo("inlandhouse24@gmail.com");
@@ -92,11 +98,11 @@ public class EmailServiceImpl implements EmailService {
 				+ "********* Customer Details **************" + '\n'
 				+ "Property Requested By (Customer) : "+user.getFirstName()+" "+user.getLastName()+" "+ '\n'
 				+ "Customer Contact No. :- "+user.getPhnNumber()+ '\n'
-				+ "Customer Email :- "+user.getEmail()+ '\n'+'\n'
+				+ "Customer Email :- "+user.getEmail()+ '\n'+'\n'+'\n'
 				+ "********* Property Owner Details ********" + '\n'
-				+ "Property Owner Name : " +'\n'
-				+ "Propery Owner Contact No. : "+ '\n'
-				+ "Property Owner Email : " +'\n'+'\n'
+				+ "Property Owner Name : " +propSumry.getOwnerName()+'\n'
+				+ "Propery Owner Contact No. : "+propSumry.getOwnerMobileNo()+'\n'
+				+ "Property Owner Email : " +propSumry.getOwnerEmail()+ '\n'+'\n'
 				+ "######## More Property Details Visit Booking History in App ######"+'\n'+'\n'
 				+ "------ Note : To Serve better Service, Notify Customer ASAP  ------" +'\n'+'\n'
 				+ "Thanks & Regards, "+ '\n'
